@@ -89,6 +89,7 @@ class OpenaiBase:
 
     @classmethod
     async def _reverse_proxy(cls, request: Request):
+        print(request.json())
         if not await cls.validate_request(request):
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
