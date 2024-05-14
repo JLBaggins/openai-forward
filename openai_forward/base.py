@@ -42,6 +42,9 @@ class OpenaiBase:
         chatsaver = ChatSaver()
 
     def validate_request_host(self, request: Request):
+
+        print(request)
+        
         ip = request.client.host
         if self.IP_WHITELIST and ip not in self.IP_WHITELIST:
             raise HTTPException(
@@ -127,7 +130,6 @@ class OpenaiBase:
             content=request.stream(),
             timeout=cls.timeout,
         )
-        print(req.read())
         try:
             r = await client.send(req, stream=True)
         except (httpx.ConnectError, httpx.ConnectTimeout) as e:
