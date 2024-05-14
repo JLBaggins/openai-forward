@@ -42,9 +42,6 @@ class OpenaiBase:
         chatsaver = ChatSaver()
 
     def validate_request_host(self, request: Request):
-
-        print(request)
-        
         ip = request.client.host
         if self.IP_WHITELIST and ip not in self.IP_WHITELIST:
             raise HTTPException(
@@ -89,7 +86,7 @@ class OpenaiBase:
 
     @classmethod
     async def _reverse_proxy(cls, request: Request):
-        print(request.json())
+        print(await request.json())
         if not await cls.validate_request(request):
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
