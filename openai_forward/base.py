@@ -127,7 +127,7 @@ class OpenaiBase:
             content=request.stream(),
             timeout=cls.timeout,
         )
-        print(req.json)
+        print(req.json())
         try:
             r = await client.send(req, stream=True)
         except (httpx.ConnectError, httpx.ConnectTimeout) as e:
